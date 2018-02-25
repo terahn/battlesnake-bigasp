@@ -5,7 +5,7 @@ import random
 # Current Strategy: Go directly to food
 def nextMove(data):
     my_x = data['you']['body']['data'][0]['x']
-    my_y = data['you']['body']['data'][0]['x']
+    my_y = data['you']['body']['data'][0]['y']
     print('My Snake: {0}, {1}'.format(my_x, my_y))
 
     food_x = data['food']['data'][0]['x']
