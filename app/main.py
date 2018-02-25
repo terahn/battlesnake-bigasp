@@ -6,11 +6,11 @@ import random
 def nextMove(data):
     my_x = data['you']['body']['data'][0]['x']
     my_y = data['you']['body']['data'][0]['x']
-    print('My Snake: ' my_x + ', ' + my_y)
+    print('My Snake: {0}, {1}'.format(my_x, my_y))
 
     food_x = data['food']['data'][0]['x']
     food_y = data['food']['data'][0]['y']
-    print('Food: ' food_x + ', ' + food_y)
+    print('Food: {0}, {1}'.format(food_x, food_y))
 
     move_x = my_x - food_x
     move_y = my_y - food_y
