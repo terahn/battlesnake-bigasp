@@ -15,11 +15,11 @@ def nextMove(data):
     move_x = my_x - food_x
     move_y = my_y - food_y
 
-    if (move_x > 0):
+    if (move_y > 0):
         return 'down'
-    elif (move_x < 0):
+    elif (move_y < 0):
         return 'up'
-    elif (move_y > 0):
+    elif (move_x > 0):
         return 'left'
     else:
         return 'right'
