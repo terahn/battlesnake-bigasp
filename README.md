@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # battlesnake-bigasp
 ## Running the Snake on a local server with docker
 
@@ -68,4 +67,3 @@ heroku logs --tail
 ## Questions?
 
 Email [battlesnake@sendwithus.com](mailto:battlesnake@sendwithus.com), or tweet [@send_with_us](http://twitter.com/send_with_us).
->>>>>>> First commit
