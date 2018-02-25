@@ -56,6 +56,7 @@ def start():
 
 @bottle.post('/move')
 def move():
+    print('Calculating Move')
     data = bottle.request.json
 
     # TODO: Do things with data
