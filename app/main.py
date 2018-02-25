@@ -2,6 +2,26 @@ import bottle
 import os
 import random
 
+# Current Strategy: Go directly to food
+def nextMove(data):
+    my_x = data['you']['body']['data'][0]['x']
+    my_y = data['you']['body']['data'][0]['x']
+
+    food_x = data['food']['data'][0]['x']
+    food_y = data['food']['data'][0]['y']
+
+    move_x = my_x - food_x
+    move_y = my_y - food_y
+
+    if (move_x > 0):
+        return 'up'
+    elif (move_x < 0):
+        return 'down'
+    elif (move_y > 0):
+        return 'left'
+    else:
+        return 'right'
+
 
 @bottle.route('/static/<path:path>')
 def static(path):
@@ -37,10 +57,11 @@ def move():
     data = bottle.request.json
 
     # TODO: Do things with data
+    move = nextMove(data)
     directions = ['up', 'down', 'left', 'right']
 
     return {
-        'move': random.choice(directions),
+        'move': move,
         'taunt': 'battlesnake-python!'
     }
 
