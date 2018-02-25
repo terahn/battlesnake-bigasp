@@ -23,10 +23,12 @@ def start():
     # TODO: Do things with data
 
     return {
-        'color': '#00FF00',
-        'taunt': '{} ({}x{})'.format(game_id, board_width, board_height),
+        'color': '#FF9333',
+        'taunt': 'What a fish!',
         'head_url': head_url,
-        'name': 'Big Asp'
+        'name': 'Big Asp',
+        'head_type': 'tongue',
+        'tail_type': 'curled'
     }
 
 
