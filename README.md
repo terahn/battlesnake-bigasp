@@ -1,3 +1,9 @@
+# battlesnake-bigasp
+## Running the Snake on a local server with docker
+
+```
+docker run -it --rm -p 3000:3000 sendwithus/battlesnake-server
+```
 # battlesnake-python
 
 A simple [BattleSnake AI](http://battlesnake.io) written in Python. 
