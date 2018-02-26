@@ -46,8 +46,8 @@ def findClosestFood(data):
 
 def updateGlobals(x, y):
     global curr_target_x, curr_target_y
-    curr_target_x = closestFood[0]
-    curr_target_y = closestFood[1]
+    curr_target_x = x
+    curr_target_y = y
 
 def nextMove(data):
     global curr_target_x, curr_target_y, my_x, my_y
