@@ -2,8 +2,8 @@ import bottle
 import os
 import random
 
-my_x = -1
-my_y = -1
+my_x = -2
+my_y = -2
 
 curr_target_x = -1
 curr_target_y = -1
