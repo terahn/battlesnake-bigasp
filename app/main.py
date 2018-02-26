@@ -44,6 +44,11 @@ def findClosestFood(data):
 
     return [target_x, target_y]
 
+def updateGlobals(x, y):
+    global curr_target_x, curr_target_y
+    curr_target_x = closestFood[0]
+    curr_target_y = closestFood[1]
+
 def nextMove(data):
     global curr_target_x, curr_target_y, my_x, my_y
     print('1. curr_target: ({0}, {1})'.format(curr_target_x, curr_target_y))
@@ -56,8 +61,7 @@ def nextMove(data):
         print('Food was eaten')
         closestFood = findClosestFood(data)
         print('closest food: ({0}, {1})'.format(closestFood[0], closestFood[1]))
-        curr_target_x = closestFood[0]
-        curr_target_y = closestFood[1]
+        updateGlobals(closestFood[0], closestFood[1])
 
     print('3. curr_target: ({0}, {1})'.format(curr_target_x, curr_target_y))
 
