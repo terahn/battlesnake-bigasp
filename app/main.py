@@ -2,6 +2,12 @@ import bottle
 import os
 import random
 
+my_x = -1
+my_y = -1
+
+curr_target_x = -1
+curr_target_y = -1
+
 # Input: snake coordinates, target coordinates
 # Output: move
 def goTo(my_x, my_y, target_x, target_y):
@@ -18,31 +24,37 @@ def goTo(my_x, my_y, target_x, target_y):
     else:
         return 'right'
 
-def nextMove(data):
-    
-    my_x = data['you']['body']['data'][0]['x']
-    my_y = data['you']['body']['data'][0]['y']
-    print('My Snake: {0}, {1}'.format(my_x, my_y))
+def findClosestFood(data):
+    closestDistance = 1000
 
-    target_x = data['food']['data'][0]['x']
-    target_y = data['food']['data'][0]['y']
-    closestDistance = target_x + target_y
-    
-    #find closest food
     for i in range(len(data['food']['data'])):
         distance_x = abs(my_x - data['food']['data'][i]['x'])
         distance_y = abs(my_y - data['food']['data'][i]['y'])
         distance = distance_x + distance_y
-        print('Food: ({0}, {1}) is {2} squares away'.format(target_x, target_y, distance))
+        print('Food: ({0}, {1}) is {2} squares away'.format(distance_x, distance_y, distance))
 
         if (distance < closestDistance):
             closestDistance = distance
             target_x = distance_x
             target_y = distance_y
     
-    print('Closest Food: ({0}, {1}) is {2} squares away'.format(target_x, target_y, distance))
+    print('Closest Food: ({0}, {1}) is {2} squares away'.format(target_x, target_y, closestDistance))
 
-    return goTo(my_x, my_y, target_x, target_y)
+    return [target_x, target_y]
+
+def nextMove(data):
+    global curr_target_x, curr_target_y, my_x, my_y
+    
+    my_x = data['you']['body']['data'][0]['x']
+    my_y = data['you']['body']['data'][0]['y']
+    print('My Snake: {0}, {1}'.format(my_x, my_y))
+    
+    if((my_x == curr_target_x and my_y == curr_target_y) or (curr_target_x == -1 and curr_target_y == -1)):
+        closestFood = findClosestFood(data)
+        curr_target_x = closestFood[0]
+        curr_target_y = closestFood[1]
+
+    return goTo(my_x, my_y, curr_target_x, curr_target_y)
 
 
 @bottle.route('/static/<path:path>')
