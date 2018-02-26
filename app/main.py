@@ -52,6 +52,7 @@ def nextMove(data):
     print('My Snake: ({0}, {1})'.format(my_x, my_y))
     
     if((my_x == curr_target_x and my_y == curr_target_y) or (curr_target_x == -1 and curr_target_y == -1)):
+        print('Food was eaten')
         closestFood = findClosestFood(data)
         curr_target_x = closestFood[0]
         curr_target_y = closestFood[1]
