@@ -2,18 +2,12 @@ import bottle
 import os
 import random
 
-# Current Strategy: Go directly to food
-def nextMove(data):
-    my_x = data['you']['body']['data'][0]['x']
-    my_y = data['you']['body']['data'][0]['y']
-    print('My Snake: {0}, {1}'.format(my_x, my_y))
-
-    food_x = data['food']['data'][0]['x']
-    food_y = data['food']['data'][0]['y']
-    print('Food: {0}, {1}'.format(food_x, food_y))
-
-    move_x = my_x - food_x
-    move_y = my_y - food_y
+# Input: snake coordinates, target coordinates
+# Output: move
+def goTo(my_x, my_y, target_x, target_y):
+    
+    move_x = my_x - target_x
+    move_y = my_y - target_y
 
     if (move_y > 0):
         return 'up'
@@ -23,6 +17,32 @@ def nextMove(data):
         return 'left'
     else:
         return 'right'
+
+def nextMove(data):
+    
+    my_x = data['you']['body']['data'][0]['x']
+    my_y = data['you']['body']['data'][0]['y']
+    print('My Snake: {0}, {1}'.format(my_x, my_y))
+
+    target_x = data['food']['data'][0]['x']
+    target_y = data['food']['data'][0]['y']
+    closestDistance = target_x + target_y
+    
+    #find closest food
+    for i in data['food']['data']:
+        distance_x = my_x - data['food']['data'][i]['x']
+        distance_y = my_y - data['food']['data'][i]['y']
+        distance = distance_x + distance_y
+        print('Food: {0}, {1}'.format(target_x, target_y))
+
+        if (distance < closestDistance):
+            closestDistance = distance
+            target_x = distance_x
+            target_y = distance_y
+    
+    print('Closest Food: {0}, {1}'.format(target_x, target_y))
+
+    return goTo(my_x, my_y, target_x, target_y)
 
 
 @bottle.route('/static/<path:path>')
