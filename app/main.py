@@ -66,7 +66,7 @@ def move():
 
     return {
         'move': move,
-        'taunt': 'battlesnake-python!'
+        'taunt': 'You Fish!'
     }
 
 
