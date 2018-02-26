@@ -29,7 +29,7 @@ def nextMove(data):
     closestDistance = target_x + target_y
     
     #find closest food
-    for i in data['food']['data']:
+    for i in range(len(data['food']['data'])):
         distance_x = my_x - data['food']['data'][i]['x']
         distance_y = my_y - data['food']['data'][i]['y']
         distance = distance_x + distance_y
