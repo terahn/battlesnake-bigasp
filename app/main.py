@@ -30,17 +30,17 @@ def nextMove(data):
     
     #find closest food
     for i in range(len(data['food']['data'])):
-        distance_x = my_x - data['food']['data'][i]['x']
-        distance_y = my_y - data['food']['data'][i]['y']
+        distance_x = abs(my_x - data['food']['data'][i]['x'])
+        distance_y = abs(my_y - data['food']['data'][i]['y'])
         distance = distance_x + distance_y
-        print('Food: {0}, {1}'.format(target_x, target_y))
+        print('Food: ({0}, {1}) is {2} squares away'.format(target_x, target_y, distance))
 
         if (distance < closestDistance):
             closestDistance = distance
             target_x = distance_x
             target_y = distance_y
     
-    print('Closest Food: {0}, {1}'.format(target_x, target_y))
+    print('Closest Food: ({0}, {1}) is {2} squares away'.format(target_x, target_y, distance))
 
     return goTo(my_x, my_y, target_x, target_y)
 
