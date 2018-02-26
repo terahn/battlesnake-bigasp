@@ -68,10 +68,15 @@ def static(path):
 
 @bottle.post('/start')
 def start():
+    global curr_target_x, curr_target_y, my_x, my_y
     data = bottle.request.json
     game_id = data['game_id']
     board_width = data['width']
     board_height = data['height']
+    my_x = -2
+    my_y = -2
+    curr_target_x = -1
+    curr_target_y = -1
 
     head_url = '%s://%s/static/head.png' % (
         bottle.request.urlparts.scheme,
