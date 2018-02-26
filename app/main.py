@@ -56,7 +56,7 @@ def nextMove(data):
         curr_target_x = closestFood[0]
         curr_target_y = closestFood[1]
 
-    print('curr_target: ({0}, {1})'.format(my_x, my_y))
+    print('curr_target: ({0}, {1})'.format(curr_target_x, curr_target_y))
 
     return goTo(my_x, my_y, curr_target_x, curr_target_y)
 
