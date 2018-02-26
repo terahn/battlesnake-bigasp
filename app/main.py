@@ -28,15 +28,17 @@ def findClosestFood(data):
     closestDistance = 1000
 
     for i in range(len(data['food']['data'])):
-        distance_x = abs(my_x - data['food']['data'][i]['x'])
-        distance_y = abs(my_y - data['food']['data'][i]['y'])
+        food_x = data['food']['data'][i]['x']
+        food_y = data['food']['data'][i]['y']
+        distance_x = abs(my_x - food_x)
+        distance_y = abs(my_y - food_y)
         distance = distance_x + distance_y
-        print('Food: ({0}, {1}) is {2} squares away'.format(distance_x, distance_y, distance))
+        print('Food: ({0}, {1}) is {2} squares away'.format(food_x, food_y, distance))
 
         if (distance < closestDistance):
             closestDistance = distance
-            target_x = distance_x
-            target_y = distance_y
+            target_x = food_x
+            target_y = food_y
     
     print('Closest Food: ({0}, {1}) is {2} squares away'.format(target_x, target_y, closestDistance))
 
