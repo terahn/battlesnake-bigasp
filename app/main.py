@@ -55,6 +55,7 @@ def nextMove(data):
     if((my_x == curr_target_x and my_y == curr_target_y) or (curr_target_x == -1 and curr_target_y == -1)):
         print('Food was eaten')
         closestFood = findClosestFood(data)
+        print('closest food: ({0}, {1})'.format(closestFood[0], closestFood[1]))
         curr_target_x = closestFood[0]
         curr_target_y = closestFood[1]
 
