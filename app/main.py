@@ -87,7 +87,7 @@ def start():
     curr_target_x = -1
     curr_target_y = -1
 
-    print('my: ({0},{1})    ,     curr_target: ({2},{3})'.format(my_x, my_y, curr_target_x, curr_target_y))
+    print('START!!! my: ({0},{1})    ,     curr_target: ({2},{3})'.format(my_x, my_y, curr_target_x, curr_target_y))
 
 
     head_url = '%s://%s/static/head.png' % (
