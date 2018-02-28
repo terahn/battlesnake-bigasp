@@ -35,14 +35,13 @@ def safeMove(data, move):
 
     #make sure snake won't run into other snakes
     for i in range(len(data['snakes']['data'])):
-        print('enemy snake head at: ({0}, {1})'.format(data['snakes']['data'][i]['body']['data'][0]['x']), data['snakes']['data'][i]['body']['data'][0]['y'])
         for j in range(len(data['snakes']['data'][i]['body']['data'])):
             enemySnake_x = data['snakes']['data'][i]['body']['data'][j]['x']
             enemySnake_y = data['snakes']['data'][i]['body']['data'][j]['y']
             if (moveTo[0] == enemySnake_x and moveTo[1] == enemySnake_y):
                 return False
 
-    return False
+    return True
 
 
 # Input: snake coordinates, target coordinates
