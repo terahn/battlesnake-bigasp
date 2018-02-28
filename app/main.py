@@ -75,13 +75,16 @@ def findClosestFood(data):
 def nextMove(data):
     global curr_target_x, curr_target_y, my_x, my_y
     
+    #location of snake's head
     my_x = data['you']['body']['data'][0]['x']
     my_y = data['you']['body']['data'][0]['y']
     print('My Snake: ({0}, {1})'.format(my_x, my_y))
+
+    #find the closest food
     closestFood = findClosestFood(data)
     print('closest food: ({0}, {1})'.format(closestFood[0], closestFood[1]))
-    curr_target_x = x
-    curr_target_y = y
+    curr_target_x = closestFood[0]
+    curr_target_y = closestFood[1]
     print('3. curr_target: ({0}, {1})'.format(curr_target_x, curr_target_y))
 
     return goTo(my_x, my_y, curr_target_x, curr_target_y, data)
