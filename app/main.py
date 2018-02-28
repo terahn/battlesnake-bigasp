@@ -33,6 +33,7 @@ def safeMove(data, move):
     if ((moveTo[0] == data['width']) or (moveTo[0] == -1) or (moveTo[1] == data['height']) or (moveTo[1] == -1)):
         return False
 
+    #TODO: this only accounts for where the other snakes are at that moment but doesn't anticipate where they will be next move
     #make sure snake won't run into other snakes
     for i in range(len(data['snakes']['data'])):
         for j in range(len(data['snakes']['data'][i]['body']['data'])):
