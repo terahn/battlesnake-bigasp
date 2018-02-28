@@ -44,7 +44,7 @@ def goTo(my_x, my_y, target_x, target_y, data):
     elif (move_x < 0 and safeMove(data, 'right')):
         return 'right'
     else:
-        return 'up'
+        return 'right'
 
 def findClosestFood(data):
     closestDistance = 1000
