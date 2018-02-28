@@ -23,6 +23,7 @@ def safeMove(data, move):
     else:
         moveTo = [myCoords[0]['x'] + 1, myCoords[0]['y']]
 
+    #make sure snake won't be moving into itself
     for i in range(1, myLength):
         if (moveTo[0] == myCoords[i]['x'] and moveTo[1] == myCoords[i]['y']):
             return False
@@ -37,14 +38,13 @@ def goTo(my_x, my_y, target_x, target_y, data):
     move_x = my_x - target_x
     move_y = my_y - target_y
 
+    #move towards target
     if (move_y > 0 and safeMove(data, 'up')):
         return 'up'
     elif (move_y < 0 and safeMove(data, 'down')):
         return 'down'
     elif (move_x > 0 and safeMove(data, 'left')):
         return 'left'
-    elif (move_x < 0 and safeMove(data, 'right')):
-        return 'right'
     else:
         return 'right'
 
