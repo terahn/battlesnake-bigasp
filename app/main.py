@@ -29,11 +29,19 @@ def safeMove(data, move):
         if (moveTo[0] == myCoords[i]['x'] and moveTo[1] == myCoords[i]['y']):
             return False
         
-        #make sure snake won't run into walls
-        if ((moveTo[0] == data['width']) or (moveTo[0] == -1) or (moveTo[1] == data['height']) or (moveTo[1] == -1)):
-            return False
+    #make sure snake won't run into walls
+    if ((moveTo[0] == data['width']) or (moveTo[0] == -1) or (moveTo[1] == data['height']) or (moveTo[1] == -1)):
+        return False
 
-    return True
+    #make sure snake won't run into other snakes
+    for i in range(len(data['snakes']['data'])):
+        for j in range(len(data['snakes']['data'][i]['body']['data'])):
+            enemySnake_x = data['snakes']['data'][i]['body']['data'][j]['x']
+            enemySnake_y = data['snakes']['data'][i]['body']['data'][j]['y']
+            if (moveTo[0] == enemySnake_x and moveTo[1] == enemySnake_y):
+                return False
+
+    return False
 
 
 # Input: snake coordinates, target coordinates
