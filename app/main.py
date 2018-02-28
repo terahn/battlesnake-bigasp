@@ -92,7 +92,7 @@ def start():
     curr_target_y = -1
 
     print('START!!! my: ({0},{1})    ,     curr_target: ({2},{3})'.format(my_x, my_y, curr_target_x, curr_target_y))
-    print(data)
+   
 
     head_url = '%s://%s/static/head.png' % (
         bottle.request.urlparts.scheme,
@@ -117,7 +117,7 @@ def move():
     data = bottle.request.json
 
     print('Inside /move:    my: ({0},{1})    ,     curr_target: ({2},{3})'.format(my_x, my_y, curr_target_x, curr_target_y))
-    # TODO: Do things with data
+    print(data)
     move = nextMove(data)
     print(move)
     directions = ['up', 'down', 'left', 'right']
