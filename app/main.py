@@ -155,7 +155,7 @@ def start():
 def move():
     print('Calculating Move')
     data = bottle.request.json
-
+    print(data)
     print('Inside /move:    my: ({0},{1})    ,     curr_target: ({2},{3})'.format(my_x, my_y, curr_target_x, curr_target_y))
     move = nextMove(data)
     print(move)
