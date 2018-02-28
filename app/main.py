@@ -8,22 +8,40 @@ my_y = -2
 curr_target_x = -1
 curr_target_y = -1
 
-last_move = ''
+def safeMove(data, move):
+    myCoords = data['you']['body']['data']
+    myLength = data['you']['length']
+
+    if (move == 'up'):
+        moveTo = [myCoords[0]['x'], myCoords[0]['y'] - 1]
+    elif (move == 'down'):
+        moveTo = [myCoords[0]['x'], myCoords[0]['y'] + 1]
+    elif (move == 'left'):
+        moveTo = [myCoords[0]['x'] - 1, myCoords[0]['y']]
+    else:
+        moveTo = [myCoords[0]['x'] + 1, myCoords[0]['y']]
+
+    for i in range(1, myLength):
+        if (moveTo[0] == myCoords[i]['x'] and moveTo[1] == myCoords[i]['y']):
+            return False
+
+    return True
+
 
 # Input: snake coordinates, target coordinates
 # Output: move
-def goTo(my_x, my_y, target_x, target_y):
+def goTo(my_x, my_y, target_x, target_y, data):
     
     move_x = my_x - target_x
     move_y = my_y - target_y
 
-    if (move_y > 0 and last_move != 'down'):
+    if (move_y > 0 and safeMove(data, 'up')):
         return 'up'
-    elif (move_y < 0 and last_move != 'up'):
+    elif (move_y < 0 and safeMove(data, 'down')):
         return 'down'
-    elif (move_x > 0 and last_move != 'right'):
+    elif (move_x > 0 and safeMove(data, 'left')):
         return 'left'
-    elif (move_x < 0 and last_move != 'left'):
+    elif (move_x < 0 and safeMove(data, 'right')):
         return 'right'
     else:
         return 'up'
@@ -69,7 +87,7 @@ def nextMove(data):
 
     print('3. curr_target: ({0}, {1})'.format(curr_target_x, curr_target_y))
 
-    return goTo(my_x, my_y, curr_target_x, curr_target_y)
+    return goTo(my_x, my_y, curr_target_x, curr_target_y, data)
 
 
 @bottle.route('/static/<path:path>')
@@ -117,7 +135,6 @@ def move():
     data = bottle.request.json
 
     print('Inside /move:    my: ({0},{1})    ,     curr_target: ({2},{3})'.format(my_x, my_y, curr_target_x, curr_target_y))
-    print(data)
     move = nextMove(data)
     print(move)
     directions = ['up', 'down', 'left', 'right']
