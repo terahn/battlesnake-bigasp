@@ -8,6 +8,8 @@ my_y = -2
 curr_target_x = -1
 curr_target_y = -1
 
+#Input: game data, a possible move
+#Output: boolean
 def safeMove(data, move):
     myCoords = data['you']['body']['data']
     myLength = data['you']['length']
@@ -46,6 +48,8 @@ def goTo(my_x, my_y, target_x, target_y, data):
     else:
         return 'right'
 
+#Input: game data
+#Output: coordinates of the closest food
 def findClosestFood(data):
     closestDistance = 1000
 
@@ -66,25 +70,18 @@ def findClosestFood(data):
 
     return [target_x, target_y]
 
-def updateGlobals(x, y):
-    global curr_target_x, curr_target_y
-    curr_target_x = x
-    curr_target_y = y
-
+#Input: game data
+#Output: the move to send to the battlesnake server
 def nextMove(data):
     global curr_target_x, curr_target_y, my_x, my_y
-    print('1. curr_target: ({0}, {1})'.format(curr_target_x, curr_target_y))
     
     my_x = data['you']['body']['data'][0]['x']
     my_y = data['you']['body']['data'][0]['y']
     print('My Snake: ({0}, {1})'.format(my_x, my_y))
-    print('2. curr_target: ({0}, {1})'.format(curr_target_x, curr_target_y))
-    #if((my_x == curr_target_x and my_y == curr_target_y) or (curr_target_x == -1 and curr_target_y == -1)):
-    print('Food was eaten')
     closestFood = findClosestFood(data)
     print('closest food: ({0}, {1})'.format(closestFood[0], closestFood[1]))
-    updateGlobals(closestFood[0], closestFood[1])
-
+    curr_target_x = x
+    curr_target_y = y
     print('3. curr_target: ({0}, {1})'.format(curr_target_x, curr_target_y))
 
     return goTo(my_x, my_y, curr_target_x, curr_target_y, data)
