@@ -35,6 +35,7 @@ def safeMove(data, move):
 
     #make sure snake won't run into other snakes
     for i in range(len(data['snakes']['data'])):
+        print('enemy snake head at: ({0}, {1})'.format(data['snakes']['data'][i]['body']['data'][0]['x']), data['snakes']['data'][i]['body']['data'][0]['y'])
         for j in range(len(data['snakes']['data'][i]['body']['data'])):
             enemySnake_x = data['snakes']['data'][i]['body']['data'][j]['x']
             enemySnake_y = data['snakes']['data'][i]['body']['data'][j]['y']
@@ -155,7 +156,6 @@ def start():
 def move():
     print('Calculating Move')
     data = bottle.request.json
-    print(data)
     print('Inside /move:    my: ({0},{1})    ,     curr_target: ({2},{3})'.format(my_x, my_y, curr_target_x, curr_target_y))
     move = nextMove(data)
     print(move)
