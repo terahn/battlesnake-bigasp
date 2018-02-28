@@ -8,6 +8,8 @@ my_y = -2
 curr_target_x = -1
 curr_target_y = -1
 
+last_move = ''
+
 # Input: snake coordinates, target coordinates
 # Output: move
 def goTo(my_x, my_y, target_x, target_y):
@@ -15,14 +17,16 @@ def goTo(my_x, my_y, target_x, target_y):
     move_x = my_x - target_x
     move_y = my_y - target_y
 
-    if (move_y > 0):
+    if (move_y > 0 and last_move != 'down'):
         return 'up'
-    elif (move_y < 0):
+    elif (move_y < 0 and last_move != 'up'):
         return 'down'
-    elif (move_x > 0):
+    elif (move_x > 0 and last_move != 'right'):
         return 'left'
-    else:
+    elif (move_x < 0 and last_move != 'left'):
         return 'right'
+    else:
+        return 'up'
 
 def findClosestFood(data):
     closestDistance = 1000
