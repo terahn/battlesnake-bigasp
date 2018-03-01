@@ -4,6 +4,13 @@
 ```
 docker run -it --rm -p 3000:3000 sendwithus/battlesnake-server
 ```
+
+#### Link to our snake on the heroku server
+
+```
+https://battlesnake-bigasp.herokuapp.com/
+```
+
 # battlesnake-python
 
 A simple [BattleSnake AI](http://battlesnake.io) written in Python. 
