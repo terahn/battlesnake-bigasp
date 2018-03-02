@@ -70,6 +70,7 @@ def safeMove(data, my_x, my_y, move, recurseTracker):
         safeVar += 1
 
     print('safeVar = {0}').format(safeVar)
+    safeVar = 0
     return True
 
 def opposite(move):
