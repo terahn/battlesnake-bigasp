@@ -109,10 +109,10 @@ def safeSpace(data):
     spaceX = data['width'] / 3
     spaceY = data['height'] / 3
 
-    spaces = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+    spaces = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
 
-    for i in range(0, data['height'] - spaceY, spaceY):
-        for j in range(0, data['width'] - spaceX, spaceX):
+    for i in range(0, data['height'], spaceY):
+        for j in range(0, data['width'], spaceX):
             for k in range(0, spaceY * i):
                 for l in range(0, spaceX * j):
                     for m in range(len(data['snakes']['data'])):
@@ -120,7 +120,8 @@ def safeSpace(data):
                             enemySnake_x = data['snakes']['data'][m]['body']['data'][n]['x']
                             enemySnake_y = data['snakes']['data'][m]['body']['data'][n]['y']
                             if (enemySnake_x == (j + l) and enemySnake_y == (i + k)):
-                                spaces[i][j] =+ 1
+                                spaces[i/spaceY][j/spaceX] += 1
+                                break;
 
     print(spaces)
 
