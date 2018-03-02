@@ -104,28 +104,6 @@ def findClosestFood(data):
     return [target_x, target_y]
 
 #Input: game data
-#Output: a safe space to target
-def safeSpace(data):
-    spaceX = data['width'] / 3
-    spaceY = data['height'] / 3
-
-    spaces = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
-
-    for i in range(0, data['height'], spaceY):
-        for j in range(0, data['width'], spaceX):
-            for k in range(0, spaceY * i):
-                for l in range(0, spaceX * j):
-                    for m in range(len(data['snakes']['data'])):
-                        for n in range(len(data['snakes']['data'][m]['body']['data'])):
-                            enemySnake_x = data['snakes']['data'][m]['body']['data'][n]['x']
-                            enemySnake_y = data['snakes']['data'][m]['body']['data'][n]['y']
-                            if (enemySnake_x == (j + l) and enemySnake_y == (i + k)):
-                                spaces[i/spaceY][j/spaceX] += 1
-                                break;
-
-    print(spaces)
-
-#Input: game data
 #Output: the move to send to the battlesnake server
 def nextMove(data):
     global curr_target_x, curr_target_y, my_x, my_y
@@ -137,8 +115,6 @@ def nextMove(data):
 
     #find the closest food
     closestFood = findClosestFood(data)
-    #find safe space
-    safeSpace(data)
     print('closest food: ({0}, {1})'.format(closestFood[0], closestFood[1]))
     curr_target_x = closestFood[0]
     curr_target_y = closestFood[1]
