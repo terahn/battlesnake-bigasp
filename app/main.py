@@ -8,6 +8,8 @@ my_y = -2
 curr_target_x = -1
 curr_target_y = -1
 
+last_move = ''
+
 #Input: game data, a possible move
 #Output: boolean
 def safeMove(data, move):
@@ -48,27 +50,35 @@ def safeMove(data, move):
 # Input: snake coordinates, target coordinates
 # Output: move
 def goTo(my_x, my_y, target_x, target_y, data):
-    
+    global last_move
     move_x = my_x - target_x
     move_y = my_y - target_y
 
     #move to target
     if (move_y > 0 and safeMove(data, 'up')):
+        last_move = 'up'
         return 'up'
     elif (move_y < 0 and safeMove(data, 'down')):
+        last_move = 'down'
         return 'down'
     elif (move_x > 0 and safeMove(data, 'left')):
+        last_move = 'left'
         return 'left'
     elif (move_x < 0 and safeMove(data, 'right')):
+        last_move = 'right'
         return 'right'
     #if you cannot move towards the target, make any safe move
     elif (safeMove(data, 'up')):
+        last_move = 'up'
         return 'up'
     elif (safeMove(data, 'down')):
+        last_move = 'down'
         return 'down'
     elif (safeMove(data, 'left')):
+        last_move = 'left'
         return 'left'
     elif (safeMove(data, 'right')):
+        last_move = 'right'
         return 'right'
 
 #Input: game data
@@ -154,7 +164,7 @@ def start():
 
 @bottle.post('/move')
 def move():
-    print('Calculating Move')
+    print('Calculating Move (Last Move = {0})'.format(last_move))
     data = bottle.request.json
     print('Inside /move:    my: ({0},{1})    ,     curr_target: ({2},{3})'.format(my_x, my_y, curr_target_x, curr_target_y))
     move = nextMove(data)
