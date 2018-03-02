@@ -92,7 +92,7 @@ def findClosestFood(data):
         distance_x = abs(my_x - food_x)
         distance_y = abs(my_y - food_y)
         distance = distance_x + distance_y
-        print('Food: ({0}, {1}) is {2} squares away'.format(food_x, food_y, distance))
+        #print('Food: ({0}, {1}) is {2} squares away'.format(food_x, food_y, distance))
 
         if (distance < closestDistance):
             closestDistance = distance
@@ -115,10 +115,10 @@ def nextMove(data):
 
     #find the closest food
     closestFood = findClosestFood(data)
-    print('closest food: ({0}, {1})'.format(closestFood[0], closestFood[1]))
+    #print('closest food: ({0}, {1})'.format(closestFood[0], closestFood[1]))
     curr_target_x = closestFood[0]
     curr_target_y = closestFood[1]
-    print('3. curr_target: ({0}, {1})'.format(curr_target_x, curr_target_y))
+    #print('3. curr_target: ({0}, {1})'.format(curr_target_x, curr_target_y))
 
     return goTo(my_x, my_y, curr_target_x, curr_target_y, data)
 
@@ -141,8 +141,6 @@ def start():
 
     curr_target_x = -1
     curr_target_y = -1
-
-    print('START!!! my: ({0},{1})    ,     curr_target: ({2},{3})'.format(my_x, my_y, curr_target_x, curr_target_y))
    
 
     head_url = '%s://%s/static/head.png' % (
@@ -166,7 +164,6 @@ def start():
 def move():
     print('Calculating Move (Last Move = {0})'.format(last_move))
     data = bottle.request.json
-    print('Inside /move:    my: ({0},{1})    ,     curr_target: ({2},{3})'.format(my_x, my_y, curr_target_x, curr_target_y))
     move = nextMove(data)
     print(move)
     directions = ['up', 'down', 'left', 'right']
