@@ -136,6 +136,8 @@ def nextMove(data):
 
     #find the closest food
     closestFood = findClosestFood(data)
+    #find safe space
+    safeSpace(data)
     print('closest food: ({0}, {1})'.format(closestFood[0], closestFood[1]))
     curr_target_x = closestFood[0]
     curr_target_y = closestFood[1]
