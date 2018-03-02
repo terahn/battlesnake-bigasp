@@ -10,6 +10,8 @@ curr_target_y = -1
 
 last_move = ''
 
+safeVar = 0
+
 #Input: game data, a possible move
 #Output: boolean
 def safeMove(data, my_x, my_y, move, recurseTracker):
