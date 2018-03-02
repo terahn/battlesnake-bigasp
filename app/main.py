@@ -88,29 +88,29 @@ def goTo(my_x, my_y, target_x, target_y, data):
     move_y = my_y - target_y
 
     #move to target
-    if (move_y > 0 and safeMove(data, my_x, my_y, 'up')):
+    if (move_y > 0 and safeMove(data, my_x, my_y, 'up', 0)):
         last_move = 'up'
         return 'up'
-    elif (move_y < 0 and safeMove(data, my_x, my_y, 'down')):
+    elif (move_y < 0 and safeMove(data, my_x, my_y, 'down', 0)):
         last_move = 'down'
         return 'down'
-    elif (move_x > 0 and safeMove(data, my_x, my_y, 'left')):
+    elif (move_x > 0 and safeMove(data, my_x, my_y, 'left', 0)):
         last_move = 'left'
         return 'left'
-    elif (move_x < 0 and safeMove(data, my_x, my_y, 'right')):
+    elif (move_x < 0 and safeMove(data, my_x, my_y, 'right', 0)):
         last_move = 'right'
         return 'right'
     #if you cannot move towards the target, make any safe move
-    elif (safeMove(data, my_x, my_y, 'up')):
+    elif (safeMove(data, my_x, my_y, 'up', 0)):
         last_move = 'up'
         return 'up'
-    elif (safeMove(data, my_x, my_y, 'down')):
+    elif (safeMove(data, my_x, my_y, 'down', 0)):
         last_move = 'down'
         return 'down'
-    elif (safeMove(data, my_x, my_y, 'left')):
+    elif (safeMove(data, my_x, my_y, 'left', 0)):
         last_move = 'left'
         return 'left'
-    elif (safeMove(data, my_x, my_y, 'right')):
+    elif (safeMove(data, my_x, my_y, 'right', 0)):
         last_move = 'right'
         return 'right'
 
