@@ -70,15 +70,14 @@ def safeMove(data, my_x, my_y, move, recurseTracker):
     return True
 
 def opposite(move):
-    if (move == 'up'):
-        return 'down'
-    if (move == 'down'):
-        return 'up'
-    if (move == 'left'):
-        return 'right'
-    if (move == 'right'):
-        return 'down'
-
+  if (move == 'up'):
+    return 'down'
+  if (move == 'down'):
+    return 'up'
+  if (move == 'left'):
+    return 'right'
+  if (move == 'right'):
+    return 'down'
 
 
 # Input: snake coordinates, target coordinates
@@ -89,29 +88,29 @@ def goTo(my_x, my_y, target_x, target_y, data):
     move_y = my_y - target_y
 
     #move to target
-    if (move_y > 0 and safeMove(data, 'up')):
+    if (move_y > 0 and safeMove(data, my_x, my_y, 'up')):
         last_move = 'up'
         return 'up'
-    elif (move_y < 0 and safeMove(data, 'down')):
+    elif (move_y < 0 and safeMove(data, my_x, my_y, 'down')):
         last_move = 'down'
         return 'down'
-    elif (move_x > 0 and safeMove(data, 'left')):
+    elif (move_x > 0 and safeMove(data, my_x, my_y, 'left')):
         last_move = 'left'
         return 'left'
-    elif (move_x < 0 and safeMove(data, 'right')):
+    elif (move_x < 0 and safeMove(data, my_x, my_y, 'right')):
         last_move = 'right'
         return 'right'
     #if you cannot move towards the target, make any safe move
-    elif (safeMove(data, 'up')):
+    elif (safeMove(data, my_x, my_y, 'up')):
         last_move = 'up'
         return 'up'
-    elif (safeMove(data, 'down')):
+    elif (safeMove(data, my_x, my_y, 'down')):
         last_move = 'down'
         return 'down'
-    elif (safeMove(data, 'left')):
+    elif (safeMove(data, my_x, my_y, 'left')):
         last_move = 'left'
         return 'left'
-    elif (safeMove(data, 'right')):
+    elif (safeMove(data, my_x, my_y, 'right')):
         last_move = 'right'
         return 'right'
 
