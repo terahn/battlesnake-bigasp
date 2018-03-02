@@ -12,24 +12,26 @@ last_move = ''
 
 #Input: game data, a possible move
 #Output: boolean
-def safeMove(data, move):
-    myCoords = data['you']['body']['data']
+def safeMove(data, my_x, my_y, move, recurseTracker):
+    global safeVar
     myLength = data['you']['length']
+    myCoords = data['you']['body']['data']
 
     if (move == 'up'):
-        moveTo = [myCoords[0]['x'], myCoords[0]['y'] - 1]
+        moveTo = [my_x, my_y - 1]
     elif (move == 'down'):
-        moveTo = [myCoords[0]['x'], myCoords[0]['y'] + 1]
+        moveTo = [my_x, my_y + 1]
     elif (move == 'left'):
-        moveTo = [myCoords[0]['x'] - 1, myCoords[0]['y']]
+        moveTo = [my_x - 1, my_y]
     else:
-        moveTo = [myCoords[0]['x'] + 1, myCoords[0]['y']]
+        moveTo = [my_x + 1, my_y]
 
     #make sure snake won't do anything stupid
-    for i in range(1, myLength):
-        #make sure snake won't run into itself
-        if (moveTo[0] == myCoords[i]['x'] and moveTo[1] == myCoords[i]['y']):
-            return False
+    if(recurseTracker == 0):
+      for i in range(1, myLength):
+          #make sure snake won't run into itself
+          if (moveTo[0] == myCoords[i]['x'] and moveTo[1] == myCoords[i]['y']):
+              return False
         
     #make sure snake won't run into walls
     if ((moveTo[0] == data['width']) or (moveTo[0] == -1) or (moveTo[1] == data['height']) or (moveTo[1] == -1)):
@@ -44,7 +46,39 @@ def safeMove(data, move):
             if (moveTo[0] == enemySnake_x and moveTo[1] == enemySnake_y):
                 return False
 
+    if (recurseTracker == 1):
+      return True
+
+    recurseTracker += 1
+    for i in ['up', 'down', 'left', 'right']:
+      if (i == opposite(move)):
+        break
+      print('hit! recurseTracker = {0}').format(recurseTracker)
+      if (i == 'up'):
+        my_y -= 1
+      elif (i == 'down'):
+        my_y += 1
+      elif (i == 'left'):
+        my_x -= 1
+      else:
+        my_x += 1
+      print('({0}, {1})').format(my_x, my_y)
+      result = safeMove(data, my_x, my_y, i, recurseTracker)
+      if (result == True):
+        safeVar += 1
+
     return True
+
+def opposite(move):
+    if (move == 'up'):
+        return 'down'
+    if (move == 'down'):
+        return 'up'
+    if (move == 'left'):
+        return 'right'
+    if (move == 'right'):
+        return 'down'
+
 
 
 # Input: snake coordinates, target coordinates
