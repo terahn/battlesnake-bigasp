@@ -74,6 +74,7 @@ def safeMove(data, my_x, my_y, move, recurseTracker):
         safeVar = 0        
         return True
     else:
+        safeVar = 0
         return False
     
 
