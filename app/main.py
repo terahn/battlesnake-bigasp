@@ -111,8 +111,8 @@ def safeSpace(data):
 
     spaces = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 
-    for i in range(0, data['height'], spaceY):
-        for j in range(0, data['width'], spaceX):
+    for i in range(0, data['height'] - 3, spaceY):
+        for j in range(0, data['width'] - 3, spaceX):
             for k in range(0, spaceY * i):
                 for l in range(0, spaceX * j):
                     for m in range(len(data['snakes']['data'])):
