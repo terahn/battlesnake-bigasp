@@ -83,6 +83,43 @@ def goTo(my_x, my_y, target_x, target_y, data):
         last_move = 'right'
         return 'right'
 
+# Input: snake coordinates, target coordinates
+# Output: move
+def goToUnsafe(my_x, my_y, target_x, target_y, data):
+    global last_move
+    move_x = my_x - target_x
+    move_y = my_y - target_y
+
+    #move to target
+    if (move_y > 0):
+        last_move = 'up'
+        return 'up'
+    elif (move_y < 0):
+        last_move = 'down'
+        return 'down'
+    elif (move_x > 0):
+        last_move = 'left'
+        return 'left'
+    elif (move_x < 0):
+        last_move = 'right'
+        return 'right'
+    #if you cannot move towards the target, make any safe move
+    return 'up'
+    '''
+    elif (safeMove(data, 'up')):
+        last_move = 'up'
+        return 'up'
+    elif (safeMove(data, 'down')):
+        last_move = 'down'
+        return 'down'
+    elif (safeMove(data, 'left')):
+        last_move = 'left'
+        return 'left'
+    elif (safeMove(data, 'right')):
+        last_move = 'right'
+        return 'right'
+    '''
+
 #Input: game data
 #Output: coordinates of the closest food
 def findClosestFood(data):
@@ -104,6 +141,8 @@ def findClosestFood(data):
     print('Closest Food: ({0}, {1}) is {2} squares away'.format(target_x, target_y, closestDistance))
 
     return (target_x, target_y)
+
+
 
 def findPath(board, my_coords, closestFood):
     result = a_star(board, my_coords, closestFood)
@@ -171,7 +210,7 @@ def nextMove(data):
 
     print('Current Target = ({0}, {1})').format(curr_target_x, curr_target_y)
 
-    return goTo(my_x, my_y, curr_target_x, curr_target_y, data)
+    return goToUnsafe(my_x, my_y, curr_target_x, curr_target_y, data)
 
 
 @bottle.route('/static/<path:path>')
