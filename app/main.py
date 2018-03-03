@@ -46,7 +46,7 @@ def safeMove(data, move, board):
             if (moveTo[0] == enemySnake_x and moveTo[1] == enemySnake_y):
                 return False
 
-    for i in range(len(data['snakes']['data']) - 1):
+    for i in range(len(data['snakes']['data'])):
         enemy_snake_x = data['snakes']['data'][i]['body']['data'][0]['x']
         enemy_snake_y = data['snakes']['data'][i]['body']['data'][0]['y']
         if (enemy_snake_x != myCoords[0]['x'] and enemy_snake_y != myCoords[0]['y']):
