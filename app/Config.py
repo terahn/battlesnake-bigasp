@@ -17,3 +17,6 @@ class Config:
     # My Snake values
     my_snake = 0
     # Create different values if the snake should attempt to follow its tail
+
+    # Empty Square values
+    empty_square = 7
