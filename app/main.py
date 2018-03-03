@@ -3,6 +3,7 @@ import os
 import random
 from bs_a_star import a_star
 from graph import graph
+import time
 
 my_x = -2
 my_y = -2
@@ -226,11 +227,13 @@ def start():
 
 @bottle.post('/move')
 def move():
+    start = time.time()
     print('Calculating Move (Last Move = {0})'.format(last_move))
     data = bottle.request.json
     move = nextMove(data)
     directions = ['up', 'down', 'left', 'right']
-
+    end = time.time()
+    print "move() runtime: %.3f" % (end - start)
     return {
         'move': move,
         'taunt': 'You Fish!'
