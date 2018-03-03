@@ -2,7 +2,7 @@ import bottle
 import os
 import random
 from bs_a_star import a_star
-from graph import graph, refresh
+from graph import graph
 
 my_x = -2
 my_y = -2
