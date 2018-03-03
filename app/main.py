@@ -132,26 +132,42 @@ def nextMove(data):
     my_x = data['you']['body']['data'][0]['x']
     my_y = data['you']['body']['data'][0]['y']
     my_coords = (my_x, my_y)
+    my_length = data['you']['length']
     print('My Snake: ({0}, {1})'.format(my_x, my_y))
 
     #find the closest food
     closestFood = findClosestFood(data)
 
-    #find path to tail
+    if (data['you']['health'] < 50):
+        #find path to food
+        path = findPath(board, my_coords, closestFood)
+        if (len(path) != 0):
+            target_coords = path[0]
+            print(path)
+            curr_target_x = target_coords[0]
+            curr_target_y = target_coords[1]
+        
+        else:
 
-    
-    #find path to food
-    path = findPath(board, my_coords, closestFood)
-    if (len(path) != 0):
-        target_coords = path[0]
-        print(path)
-        curr_target_x = target_coords[0]
-        curr_target_y = target_coords[1]
-    
+            curr_target_x = 0
+            curr_target_y = 0
     else:
+        #find path to tail
+        my_tail_x = data['you']['body']['data'][my_length - 1]['x']
+        my_tail_y = data['you']['body']['data'][my_length - 1]['y']
+        my_tail_coords = (my_tail_x, my_tail_y)
+        path = findPath(board, my_coords, my_tail_coords)
+        if (len(path) != 0):
+            target_coords = path[0]
+            print(path)
+            curr_target_x = target_coords[0]
+            curr_target_y = target_coords[1]
+        
+        else:
 
-        curr_target_x = 0
-        curr_target_y = 0
+            curr_target_x = 0
+            curr_target_y = 0
+    
 
     print('Current Target = ({0}, {1})').format(curr_target_x, curr_target_y)
 
