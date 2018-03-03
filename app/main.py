@@ -32,7 +32,7 @@ def safeMove(data, move):
         #make sure snake won't run into itself
         if (moveTo[0] == myCoords[i]['x'] and moveTo[1] == myCoords[i]['y']):
             return False
-        
+
     #make sure snake won't run into walls
     if ((moveTo[0] == data['width']) or (moveTo[0] == -1) or (moveTo[1] == data['height']) or (moveTo[1] == -1)):
         return False
@@ -100,7 +100,7 @@ def findClosestFood(data):
             closestDistance = distance
             target_x = food_x
             target_y = food_y
-    
+
     print('Closest Food: ({0}, {1}) is {2} squares away'.format(target_x, target_y, closestDistance))
 
     return (target_x, target_y)
@@ -146,7 +146,7 @@ def nextMove(data):
             print(path)
             curr_target_x = target_coords[0]
             curr_target_y = target_coords[1]
-        
+
         else:
 
             curr_target_x = 0
@@ -162,12 +162,12 @@ def nextMove(data):
             print(path)
             curr_target_x = target_coords[0]
             curr_target_y = target_coords[1]
-        
+
         else:
 
             curr_target_x = 0
             curr_target_y = 0
-    
+
 
     print('Current Target = ({0}, {1})').format(curr_target_x, curr_target_y)
 
@@ -192,7 +192,7 @@ def start():
 
     curr_target_x = -1
     curr_target_y = -1
-   
+
 
     head_url = '%s://%s/static/head.png' % (
         bottle.request.urlparts.scheme,
@@ -209,7 +209,6 @@ def start():
         'head_type': 'tongue',
         'tail_type': 'curled'
     }
-
 
 @bottle.post('/move')
 def move():
