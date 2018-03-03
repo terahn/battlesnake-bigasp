@@ -49,11 +49,12 @@ def safeMove(data, move, board):
     for i in range(len(data['snakes']['data']) - 1):
         enemy_snake_x = data['snakes']['data'][i]['body']['data'][0]['x']
         enemy_snake_y = data['snakes']['data'][i]['body']['data'][0]['y']
-        enemy_snake_neighbours = board.neighbors((enemy_snake_x, enemy_snake_y))
-        for j in range(len(enemy_snake_neighbours)):
-            if (moveTo[0] == enemy_snake_neighbours[j][0] and moveTo[1] == enemy_snake_neighbours[j][1]):
-                print('NOOOO')
-                return False
+        if (enemy_snake_x != myCoords[0]['x'] and enemy_snake_y != myCoords[0]['y']):
+            enemy_snake_neighbours = board.neighbors((enemy_snake_x, enemy_snake_y))
+            for j in range(len(enemy_snake_neighbours)):
+                if (moveTo[0] == enemy_snake_neighbours[j][0] and moveTo[1] == enemy_snake_neighbours[j][1]):
+                    print('NOOOO')
+                    return False
 
 
 
