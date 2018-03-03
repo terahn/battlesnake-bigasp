@@ -208,7 +208,7 @@ def start():
     # TODO: Do things with data
 
     return {
-        'color': '#FF9333',
+        'color': '#FFCCFF',
         'taunt': 'What a fish!',
         'head_url': head_url,
         'name': 'Big Asp',
