@@ -30,6 +30,7 @@ class GameBoard:
             x = (food['x']) + 1 # +1 to account for borders
             y = (food['y']) + 1
             self.board[y][x] = food_value
+            print('food at ', x, ',',y)
 
 
         # Placing enemy snakes on the board
@@ -44,7 +45,19 @@ class GameBoard:
             for el in snake['body']['data']:
                 x = (el['x']) + 1 # +1 to account for borders
                 y = (el['y']) + 1
-                self.board[y][x]
+                self.board[y][x] = enemy_value
+                print('enemy at at ', x, ',',y)
+            # ToDo: Add a check to each enemy snake here. If their head is facing us
+            #       and they are smaller, then update the value of their head on the
+            #       board.
+
+
+        # Placing own snake on the board
+        for el in data['you']['body']['data']:
+            x = (el['x']) + 1 # +1 to account for borders
+            y = (el['y']) + 1
+            self.board[y][x] = Config.my_snake
+            print('my snake at ', x, ',',y)
 
 
     def print_board(self):

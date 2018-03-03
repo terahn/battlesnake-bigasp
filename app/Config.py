@@ -13,3 +13,7 @@ class Config:
     enemy_is_smaller = 2
     enemy_is_bigger = 0
     enemy_is_equal = 0 # Fix this with a condition on whether you can get to the food before them
+
+    # My Snake values
+    my_snake = 0
+    # Create different values if the snake should attempt to follow its tail
