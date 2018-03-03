@@ -151,8 +151,11 @@ def nextMove(data):
 
     #find the closest food
     closestFood = findClosestFood(data)
+    distance_x = abs(my_x - closestFood[0])
+    distance_y = abs(my_y - closestFood[1])
+    distance = distance_x + distance_y
     print(closestFood)
-    if (data['you']['health'] < ((data['width'] + data['height']) * 2)):
+    if (data['you']['health'] < ((data['width'] + data['height']) * 2) or (distance < int(((data['width'] + data['height']) / 2) / 10))):
         #find path to food
         path = findPath(board, my_coords, closestFood)
         if (len(path) == 0):
