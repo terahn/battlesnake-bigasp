@@ -15,8 +15,10 @@ class GameBoard:
 
     # Populates the board using the data in the format specified by BattleSnake
     def populate_board(self, data):
-        # Get snake health
-        self.my_health = 100
+        # Get snake attributes
+        self.my_health = data['you']['health']
+        self.my_length = data['you']['length']
+
 
         # Placing food on the board
         if self.my_health > 50:
@@ -24,9 +26,29 @@ class GameBoard:
         else:
             food_value = Config.food_has_low_health
         # Populate food on board
-        for el in data['food']['data']:
-            x = (el['x']) + 1 # +1 to account for borders
-            y = (el['y']) + 1
+        for food in data['food']['data']:
+            x = (food['x']) + 1 # +1 to account for borders
+            y = (food['y']) + 1
             self.board[y][x] = food_value
+
+
+        # Placing enemy snakes on the board
+        for snake in data['snakes']['data']:
+            if snake['length'] > self.my_length:
+                enemy_value = Config.enemy_is_bigger
+            elif snake['length'] < self.my_length:
+                enemy_value = Config.enemy_is_smaller
+            else:
+                # ADD MORE LOGIC TO THIS
+                enemy_value = Config.enemy_is_equal
+            for el in snake['body']['data']:
+                x = (el['x']) + 1 # +1 to account for borders
+                y = (el['y']) + 1
+                self.board[y][x]
+
+
+    def print_board(self):
+        for el in self.board:
+            print(el)
 
         return
