@@ -213,7 +213,7 @@ def start():
         'head_url': head_url,
         'name': 'Big Asp',
         'head_type': 'tongue',
-        'tail_type': 'curled'
+        'tail_type': 'fat-rattle'
     }
 
 
