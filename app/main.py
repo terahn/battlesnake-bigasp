@@ -139,38 +139,30 @@ def nextMove(data):
 
     #find the closest food
     closestFood = findClosestFood(data)
-
+    print(closestFood)
     if (data['you']['health'] < 50):
         #find path to food
         path = findPath(board, my_coords, closestFood)
-        if (len(path) != 0):
-            target_coords = path[0]
-            print(path)
-            curr_target_x = target_coords[0]
-            curr_target_y = target_coords[1]
-        
-        else:
-
-            curr_target_x = 0
-            curr_target_y = 0
+        if (len(path) == 0):
+            i = 0
+            print('???')
+            while (len(path) == 0):
+                path = findPath(board, my_coords, (data['width'] - my_x + i, data['height'] - my_y + i))
     else:
         #find path to tail
         my_tail_x = data['you']['body']['data'][my_length - 1]['x']
         my_tail_y = data['you']['body']['data'][my_length - 1]['y']
         my_tail_coords = (my_tail_x, my_tail_y)
         path = findPath(board, my_coords, my_tail_coords)
-        if (len(path) != 0):
-            target_coords = path[0]
-            print(path)
-            curr_target_x = target_coords[0]
-            curr_target_y = target_coords[1]
-        
-        else:
-
-            curr_target_x = 0
-            curr_target_y = 0
+        if (len(path) == 0):
+            i = 0
+            print('!!!')
+            while (len(path) == 0):
+                path = findPath(board, my_coords, (data['width'] - my_x + i, data['height'] - my_y + i))
     
-
+    target_coords = path[0]
+    curr_target_x = target_coords[0]
+    curr_target_y = target_coords[1]
     print('Current Target = ({0}, {1})').format(curr_target_x, curr_target_y)
 
     return goTo(my_x, my_y, curr_target_x, curr_target_y, data)
