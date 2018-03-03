@@ -1,6 +1,8 @@
 import bottle
 import os
 import random
+from bs_a_star import a_star
+from graph import graph
 
 my_x = -2
 my_y = -2
@@ -101,24 +103,49 @@ def findClosestFood(data):
     
     print('Closest Food: ({0}, {1}) is {2} squares away'.format(target_x, target_y, closestDistance))
 
-    return [target_x, target_y]
+    return (target_x, target_y)
+
+def findPath(board, my_coords, closestFood):
+    result = a_star(board, my_coords, closestFood)
+
+    path = []
+    node = closestFood
+    while node != my_coords:
+        if (node in result):
+            path.append(node)
+            node = result[node]
+        else:
+            path = []
+            break
+    path.reverse()
+
+    return path
 
 #Input: game data
 #Output: the move to send to the battlesnake server
 def nextMove(data):
     global curr_target_x, curr_target_y, my_x, my_y
-    
+    board = graph()
+    board.init(data['width'], data['height'])
     #location of snake's head
     my_x = data['you']['body']['data'][0]['x']
     my_y = data['you']['body']['data'][0]['y']
+    my_coords = (my_x, my_y)
     print('My Snake: ({0}, {1})'.format(my_x, my_y))
 
     #find the closest food
     closestFood = findClosestFood(data)
-    #print('closest food: ({0}, {1})'.format(closestFood[0], closestFood[1]))
-    curr_target_x = closestFood[0]
-    curr_target_y = closestFood[1]
-    #print('3. curr_target: ({0}, {1})'.format(curr_target_x, curr_target_y))
+    #find path
+    path = findPath(board, my_coords, closestFood)
+    if (len(path) != 0):
+        target_coords = path[0]
+        print(path)
+        curr_target_x = target_coords[0]
+        curr_target_y = target_coords[1]
+    
+    else:
+        curr_target_x = 0
+        curr_target_y = 0
 
     return goTo(my_x, my_y, curr_target_x, curr_target_y, data)
 

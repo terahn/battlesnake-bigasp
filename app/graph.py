@@ -1,4 +1,4 @@
-def graph(object):
+class graph(object):
     no_go_zones = []
     width = -1
     height = -1
@@ -37,10 +37,11 @@ def graph(object):
             
     def check_bounds(self, node):
         if node[0] < 0 or node[0] >= self.width:
-            return false
+            return False
         if node[1] < 0 or node[1] >= self.height:
-            return false
-        return true
+            return False
+        return True
     
     def cost(self, start, end):
         return abs(start[0] - end[0]) + abs(start[1] - end[1])
+
