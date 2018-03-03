@@ -1,12 +1,16 @@
 import bottle
 import os
 import random
+from bs_a_star import a_star
+from graph import graph
 
 my_x = -2
 my_y = -2
 
 curr_target_x = -1
 curr_target_y = -1
+
+last_move = ''
 
 #Input: game data, a possible move
 #Output: boolean
@@ -48,27 +52,35 @@ def safeMove(data, move):
 # Input: snake coordinates, target coordinates
 # Output: move
 def goTo(my_x, my_y, target_x, target_y, data):
-    
+    global last_move
     move_x = my_x - target_x
     move_y = my_y - target_y
 
     #move to target
     if (move_y > 0 and safeMove(data, 'up')):
+        last_move = 'up'
         return 'up'
     elif (move_y < 0 and safeMove(data, 'down')):
+        last_move = 'down'
         return 'down'
     elif (move_x > 0 and safeMove(data, 'left')):
+        last_move = 'left'
         return 'left'
     elif (move_x < 0 and safeMove(data, 'right')):
+        last_move = 'right'
         return 'right'
     #if you cannot move towards the target, make any safe move
     elif (safeMove(data, 'up')):
+        last_move = 'up'
         return 'up'
     elif (safeMove(data, 'down')):
+        last_move = 'down'
         return 'down'
     elif (safeMove(data, 'left')):
+        last_move = 'left'
         return 'left'
     elif (safeMove(data, 'right')):
+        last_move = 'right'
         return 'right'
 
 #Input: game data
@@ -82,7 +94,7 @@ def findClosestFood(data):
         distance_x = abs(my_x - food_x)
         distance_y = abs(my_y - food_y)
         distance = distance_x + distance_y
-        print('Food: ({0}, {1}) is {2} squares away'.format(food_x, food_y, distance))
+        #print('Food: ({0}, {1}) is {2} squares away'.format(food_x, food_y, distance))
 
         if (distance < closestDistance):
             closestDistance = distance
@@ -91,24 +103,73 @@ def findClosestFood(data):
     
     print('Closest Food: ({0}, {1}) is {2} squares away'.format(target_x, target_y, closestDistance))
 
-    return [target_x, target_y]
+    return (target_x, target_y)
+
+def findPath(board, my_coords, closestFood):
+    result = a_star(board, my_coords, closestFood)
+
+    path = []
+    node = closestFood
+    while node != my_coords:
+        if (node in result):
+            path.append(node)
+            node = result[node]
+        else:
+            path = []
+            break
+    path.reverse()
+
+    return path
 
 #Input: game data
 #Output: the move to send to the battlesnake server
 def nextMove(data):
     global curr_target_x, curr_target_y, my_x, my_y
-    
+    board = graph()
+    board.init(data['width'], data['height'])
+    board.refresh(data)
     #location of snake's head
     my_x = data['you']['body']['data'][0]['x']
     my_y = data['you']['body']['data'][0]['y']
+    my_coords = (my_x, my_y)
+    my_length = data['you']['length']
     print('My Snake: ({0}, {1})'.format(my_x, my_y))
 
     #find the closest food
     closestFood = findClosestFood(data)
-    print('closest food: ({0}, {1})'.format(closestFood[0], closestFood[1]))
-    curr_target_x = closestFood[0]
-    curr_target_y = closestFood[1]
-    print('3. curr_target: ({0}, {1})'.format(curr_target_x, curr_target_y))
+
+    if (data['you']['health'] < 50):
+        #find path to food
+        path = findPath(board, my_coords, closestFood)
+        if (len(path) != 0):
+            target_coords = path[0]
+            print(path)
+            curr_target_x = target_coords[0]
+            curr_target_y = target_coords[1]
+        
+        else:
+
+            curr_target_x = 0
+            curr_target_y = 0
+    else:
+        #find path to tail
+        my_tail_x = data['you']['body']['data'][my_length - 1]['x']
+        my_tail_y = data['you']['body']['data'][my_length - 1]['y']
+        my_tail_coords = (my_tail_x, my_tail_y)
+        path = findPath(board, my_coords, my_tail_coords)
+        if (len(path) != 0):
+            target_coords = path[0]
+            print(path)
+            curr_target_x = target_coords[0]
+            curr_target_y = target_coords[1]
+        
+        else:
+
+            curr_target_x = 0
+            curr_target_y = 0
+    
+
+    print('Current Target = ({0}, {1})').format(curr_target_x, curr_target_y)
 
     return goTo(my_x, my_y, curr_target_x, curr_target_y, data)
 
@@ -131,8 +192,6 @@ def start():
 
     curr_target_x = -1
     curr_target_y = -1
-
-    print('START!!! my: ({0},{1})    ,     curr_target: ({2},{3})'.format(my_x, my_y, curr_target_x, curr_target_y))
    
 
     head_url = '%s://%s/static/head.png' % (
@@ -154,9 +213,8 @@ def start():
 
 @bottle.post('/move')
 def move():
-    print('Calculating Move')
+    print('Calculating Move (Last Move = {0})'.format(last_move))
     data = bottle.request.json
-    print('Inside /move:    my: ({0},{1})    ,     curr_target: ({2},{3})'.format(my_x, my_y, curr_target_x, curr_target_y))
     move = nextMove(data)
     print(move)
     directions = ['up', 'down', 'left', 'right']
