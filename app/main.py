@@ -161,8 +161,10 @@ def nextMove(data):
         if (len(path) == 0):
             i = 0
             print('???')
+            '''
             while (len(path) == 0):
                 path = findPath(board, my_coords, (data['width'] - my_x + i, data['height'] - my_y + i))
+            '''
     else:
         #find path to tail
         my_tail_x = data['you']['body']['data'][my_length - 1]['x']
@@ -172,8 +174,10 @@ def nextMove(data):
         if (len(path) == 0):
             i = 0
             print('!!!')
+            '''
             while (len(path) == 0):
                 path = findPath(board, my_coords, (data['width'] - my_x + i, data['height'] - my_y + i))
+            '''
     
     target_coords = path[0]
     curr_target_x = target_coords[0]
@@ -225,15 +229,12 @@ def move():
     print('Calculating Move (Last Move = {0})'.format(last_move))
     data = bottle.request.json
     move = nextMove(data)
-    print(move)
     directions = ['up', 'down', 'left', 'right']
 
     return {
         'move': move,
         'taunt': 'You Fish!'
     }
-
-
 # Expose WSGI app (so gunicorn can find it)
 application = bottle.default_app()
 if __name__ == '__main__':
