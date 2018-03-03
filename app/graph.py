@@ -7,16 +7,16 @@ class graph(object):
         self.width = width
         self.height = height
         
-    def refresh(self, board_stats):
+    def refresh(self, data):
         self.no_go_zones = []
-        other_snakes = board_stats['other_snakes']
+        snakes = data['snakes']['data']
         
-        for snake in other_snakes:
-            nodes = snake['nodes']
+        for snake in snakes:
+            nodes = snake['body']['data']
             for node in range(len(nodes) - 1):
                 xy_pos = nodes[node]
-                x_pos = node[0]
-                y_pos = node[1]
+                x_pos = xy_pos['x']
+                y_pos = xy_pos['y']
                 self.no_go_zones.append((x_pos, y_pos))
                 
     def neighbors(self, node):

@@ -2,7 +2,7 @@ import bottle
 import os
 import random
 from bs_a_star import a_star
-from graph import graph
+from graph import graph, refresh
 
 my_x = -2
 my_y = -2
@@ -127,6 +127,7 @@ def nextMove(data):
     global curr_target_x, curr_target_y, my_x, my_y
     board = graph()
     board.init(data['width'], data['height'])
+    board.refresh(data)
     #location of snake's head
     my_x = data['you']['body']['data'][0]['x']
     my_y = data['you']['body']['data'][0]['y']
@@ -135,7 +136,11 @@ def nextMove(data):
 
     #find the closest food
     closestFood = findClosestFood(data)
-    #find path
+
+    #find path to tail
+
+    
+    #find path to food
     path = findPath(board, my_coords, closestFood)
     if (len(path) != 0):
         target_coords = path[0]
