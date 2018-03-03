@@ -144,8 +144,11 @@ def nextMove(data):
         curr_target_y = target_coords[1]
     
     else:
+
         curr_target_x = 0
         curr_target_y = 0
+
+    print('Current Target = ({0}, {1})').format(curr_target_x, curr_target_y)
 
     return goTo(my_x, my_y, curr_target_x, curr_target_y, data)
 
