@@ -11,15 +11,7 @@ curr_target_x = -1
 curr_target_y = -1
 
 last_move = ''
-curr_taunt = ''
-tauntFile = open('taunts.txt', 'r')
 
-
-#Taunts made here
-def theTaunter(data):
-    if(data['turn'] % 20 == 0):
-        curr_taunt = tauntFile.readline()
-    return curr_taunt
 #Input: game data, a possible move
 #Output: boolean
 def safeMove(data, move, board):
@@ -232,10 +224,10 @@ def move():
     move = nextMove(data)
     print(move)
     directions = ['up', 'down', 'left', 'right']
-    taunt = theTaunter(data)
+
     return {
         'move': move,
-        'taunt': taunt
+        'taunt': 'You Fish!'
     }
 
 
