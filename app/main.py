@@ -14,7 +14,7 @@ last_move = ''
 
 #Input: game data, a possible move
 #Output: boolean
-def safeMove(data, move):
+def safeMove(data, move, board):
     myCoords = data['you']['body']['data']
     myLength = data['you']['length']
 
@@ -46,40 +46,50 @@ def safeMove(data, move):
             if (moveTo[0] == enemySnake_x and moveTo[1] == enemySnake_y):
                 return False
 
+    for i in range(len(data['snakes']['data'])):
+        enemy_snake_x = data['snakes']['data'][i]['body']['data'][0]['x']
+        enemy_snake_y = data['snakes']['data'][i]['body']['data'][0]['y']
+        enemy_snake_neighbours = board.neighbors((enemy_snake_x, enemy_snake_y))
+        for j in range(len(enemy_snake_neighbours)):
+            if (moveTo[0] == enemy_snake_neighbours[j][0] and moveTo[1] == enemy_snake_neighbours[j][1]):
+                return False
+
+
+
     return True
 
 
 # Input: snake coordinates, target coordinates
 # Output: move
-def goTo(my_x, my_y, target_x, target_y, data):
+def goTo(my_x, my_y, target_x, target_y, data, board):
     global last_move
     move_x = my_x - target_x
     move_y = my_y - target_y
 
     #move to target
-    if (move_y > 0):
+    if (move_y > 0 and safeMove(data, 'up', board)):
         last_move = 'up'
         return 'up'
-    elif (move_y < 0):
+    elif (move_y < 0 and safeMove(data, 'down', board)):
         last_move = 'down'
         return 'down'
-    elif (move_x > 0):
+    elif (move_x > 0 and safeMove(data, 'left', board)):
         last_move = 'left'
         return 'left'
-    elif (move_x < 0):
+    elif (move_x < 0 and safeMove(data, 'right', board)):
         last_move = 'right'
         return 'right'
     #if you cannot move towards the target, make any safe move
-    elif (safeMove(data, 'up')):
+    elif (safeMove(data, 'up', board)):
         last_move = 'up'
         return 'up'
-    elif (safeMove(data, 'down')):
+    elif (safeMove(data, 'down', board)):
         last_move = 'down'
         return 'down'
-    elif (safeMove(data, 'left')):
+    elif (safeMove(data, 'left', board)):
         last_move = 'left'
         return 'left'
-    elif (safeMove(data, 'right')):
+    elif (safeMove(data, 'right', board)):
         last_move = 'right'
         return 'right'
 
@@ -165,7 +175,7 @@ def nextMove(data):
     curr_target_y = target_coords[1]
     print('Current Target = ({0}, {1})').format(curr_target_x, curr_target_y)
 
-    return goTo(my_x, my_y, curr_target_x, curr_target_y, data)
+    return goTo(my_x, my_y, curr_target_x, curr_target_y, data, board)
 
 
 @bottle.route('/static/<path:path>')
