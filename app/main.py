@@ -69,16 +69,16 @@ def goTo(my_x, my_y, target_x, target_y, data, board):
     move_y = my_y - target_y
 
     #move to target
-    if (move_y > 0 and safeMove(data, 'up', board)):
+    if (move_y > 0 ):#and safeMove(data, 'up', board)):
         last_move = 'up'
         return 'up'
-    elif (move_y < 0 and safeMove(data, 'down', board)):
+    elif (move_y < 0 ):#and safeMove(data, 'down', board)):
         last_move = 'down'
         return 'down'
-    elif (move_x > 0 and safeMove(data, 'left', board)):
+    elif (move_x > 0 ):#and safeMove(data, 'left', board)):
         last_move = 'left'
         return 'left'
-    elif (move_x < 0 and safeMove(data, 'right', board)):
+    elif (move_x < 0 ):#and safeMove(data, 'right', board)):
         last_move = 'right'
         return 'right'
     #if you cannot move towards the target, make any safe move
