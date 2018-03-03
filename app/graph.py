@@ -25,9 +25,9 @@ class graph(object):
         left = [-1, 0]
         right = [1, 0]
         n_up = (node[0] + up[0], node[1] + up[1])
-        n_down = (node[0] + up[0], node[1] + up[1])
-        n_left = (node[0] + up[0], node[1] + up[1])
-        n_right = (node[0] + up[0], node[1] + up[1])
+        n_down = (node[0] + down[0], node[1] + down[1])
+        n_left = (node[0] + left[0], node[1] + left[1])
+        n_right = (node[0] + right[0], node[1] + right[1])
         n_temp = [n_up, n_down, n_left, n_right]
         neighbors = []
         for neighbor in n_temp:
