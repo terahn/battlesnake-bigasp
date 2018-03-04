@@ -245,11 +245,11 @@ def move():
 
     tmp_arr = []
     if len(indices) == 1:
-        if i = 0:
+        if indices[0] == 0:
             move = 'right'
-        elif i = 1:
+        elif indices[0] == 1:
             move = 'left'
-        elif i = 2:
+        elif indices[0] == 2:
             move = 'up'
         else:
             move = 'down'
