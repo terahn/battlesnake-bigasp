@@ -244,6 +244,15 @@ def move():
     indices = [i for i, v in enumerate(values) if v == maximum]
 
     tmp_arr = []
+    if len(indices) == 1:
+        if i = 0:
+            move = 'right'
+        elif i = 1:
+            move = 'left'
+        elif i = 2:
+            move = 'up'
+        else:
+            move = 'down'
     if len(indices) > 1:
         for i in indices:
             if i == 0: # right
@@ -256,7 +265,7 @@ def move():
                 tmp_arr.append((g.get_value_for_down(), 'down'))
 
             maximum = max(tmp_arr)
-    move = 'up'
+            move = maximum[1]
 
     g.print_board()
     print('The move picked is: ', move)
