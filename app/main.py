@@ -264,7 +264,7 @@ def move():
     print('The tmp_arr picked is: ', tmp_arr)
 
     return {
-        'move': move,
+        'move': 'up',
         'taunt': 'You Fish!'
     }
 
