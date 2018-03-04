@@ -4,6 +4,7 @@ import random
 from bs_a_star import a_star
 from graph import graph
 import time
+from random import randint
 
 my_x = -2
 my_y = -2
@@ -163,7 +164,7 @@ def nextMove(data):
             i = 0
             print('???')
             while (len(path) == 0):
-                path = findPath(board, my_coords, (data['width'] - my_x + i, data['height'] - my_y + i))
+                path = findPath(board, my_coords, (randint(0, data['width'] - 1), randint(0, data['height'] - 1))
                 i += 1
     else:
         #find path to tail
