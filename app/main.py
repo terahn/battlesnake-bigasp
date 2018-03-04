@@ -161,11 +161,10 @@ def nextMove(data):
         #find path to food
         path = findPath(board, my_coords, closestFood)
         if (len(path) == 0):
-            i = 0
             print('???')
             while (len(path) == 0):
                 path = findPath(board, my_coords, (randint(0, data['width'] - 1), randint(0, data['height'] - 1))
-                i += 1
+
     else:
         #find path to tail
         my_tail_x = data['you']['body']['data'][my_length - 1]['x']
@@ -173,11 +172,9 @@ def nextMove(data):
         my_tail_coords = (my_tail_x, my_tail_y)
         path = findPath(board, my_coords, my_tail_coords)
         if (len(path) == 0):
-            i = 0
             print('!!!')
             while (len(path) == 0):
-                path = findPath(board, my_coords, (data['width'] - my_x + i, data['height'] - my_y + i))
-                i += 1
+                path = findPath(board, my_coords, (randint(0, data['width'] - 1), randint(0, data['height'] - 1))
             
     
     target_coords = path[0]
