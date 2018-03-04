@@ -267,10 +267,11 @@ def move():
             maximum = max(tmp_arr)
             move = maximum[1]
 
-    g.print_board()
-    print('The move picked is: ', move)
-    print('The values picked is: ', values)
-    print('The tmp_arr picked is: ', tmp_arr)
+    # g.print_board()
+    # print('The move picked is: ', move)
+    # print('The values picked is: ', values)
+    # print('The tmp_arr picked is: ', tmp_arr)
+    print(move)
 
     return {
         'move': move,
