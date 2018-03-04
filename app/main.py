@@ -4,6 +4,8 @@ import random
 from bs_a_star import a_star
 from graph import graph
 
+from GameBoard import GameBoard
+
 my_x = -2
 my_y = -2
 
@@ -219,11 +221,43 @@ def start():
 
 @bottle.post('/move')
 def move():
-    print('Calculating Move (Last Move = {0})'.format(last_move))
+    # print('Calculating Move (Last Move = {0})'.format(last_move))
     data = bottle.request.json
-    move = nextMove(data)
-    print(move)
-    directions = ['up', 'down', 'left', 'right']
+    # move = nextMove(data)
+    # print(move)
+    # directions = ['right', 'left', 'up', 'down']
+
+    g = GameBoard(data['width'], data['height'])
+    g.populate_board(data)
+
+    values = []
+    right = g.get_right()
+    values.append(right)
+    left = g.get_left()
+    values.append(left)
+    up = g.get_up()
+    values.append(up)
+    down = g.get_down()
+    values.append(down)
+
+    maximum = max(values)
+    indices = [i for i, v in enumerate(values) if v == maximum]
+
+    tmp_arr = []
+    for i in indices:
+        if i == 0: # right
+            tmp_arr.append((g.get_value_for_right_side(), 'right'))
+        if i == 1:
+            tmp_arr.append((g.get_value_for_left_side(), 'left'))
+        if i == 2:
+            tmp_arr.append((g.get_value_for_up(), 'up'))
+        if i == 3:
+            tmp_arr.append((g.get_value_for_down(), 'down'))
+
+    maximum = min(tmp_arr)
+    move = maximum[1]
+
+
 
     return {
         'move': move,
