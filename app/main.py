@@ -244,18 +244,18 @@ def move():
     indices = [i for i, v in enumerate(values) if v == maximum]
 
     tmp_arr = []
-    # if len(indices) > 1:
-    #     for i in indices:
-    #         if i == 0: # right
-    #             tmp_arr.append((g.get_value_for_right_side(), 'right'))
-    #         if i == 1:
-    #             tmp_arr.append((g.get_value_for_left_side(), 'left'))
-    #         if i == 2:
-    #             tmp_arr.append((g.get_value_for_up(), 'up'))
-    #         if i == 3:
-    #             tmp_arr.append((g.get_value_for_down(), 'down'))
-    #
-    #         maximum = max(tmp_arr)
+    if len(indices) > 1:
+        for i in indices:
+            if i == 0: # right
+                tmp_arr.append((g.get_value_for_right_side(), 'right'))
+            if i == 1:
+                tmp_arr.append((g.get_value_for_left_side(), 'left'))
+            if i == 2:
+                tmp_arr.append((g.get_value_for_up(), 'up'))
+            if i == 3:
+                tmp_arr.append((g.get_value_for_down(), 'down'))
+
+            maximum = max(tmp_arr)
     move = 'up'
 
     g.print_board()
