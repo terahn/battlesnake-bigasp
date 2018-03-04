@@ -128,7 +128,7 @@ class GameBoard:
         print('Returned: ', value/count)
         return value/count
 
-    def get_value_for_left_side():
+    def get_value_for_left_side(self):
         my_snake_head_x = self.my_snake_coordinates[0][0]
         my_snake_head_y = self.my_snake_coordinates[0][1]                # loop to obtain value
         count = 0
@@ -142,7 +142,7 @@ class GameBoard:
         print('Returned: ', value/count)
         return value/count
 
-    def get_value_for_up():
+    def get_value_for_up(self):
         my_snake_head_x = self.my_snake_coordinates[0][0]
         my_snake_head_y = self.my_snake_coordinates[0][1]                # loop to obtain value
         count = 0
@@ -156,7 +156,7 @@ class GameBoard:
         print('Returned: ', value/count)
         return value/count
 
-    def get_value_for_down():
+    def get_value_for_down(self):
         my_snake_head_x = self.my_snake_coordinates[0][0]
         my_snake_head_y = self.my_snake_coordinates[0][1]                # loop to obtain value
         count = 0

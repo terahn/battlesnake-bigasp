@@ -257,7 +257,7 @@ def move():
     maximum = min(tmp_arr)
     move = maximum[1]
 
-
+    g.print_board()
 
     return {
         'move': move,
