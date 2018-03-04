@@ -164,6 +164,7 @@ def nextMove(data):
             print('???')
             while (len(path) == 0):
                 path = findPath(board, my_coords, (data['width'] - my_x + i, data['height'] - my_y + i))
+                i += 1
     else:
         #find path to tail
         my_tail_x = data['you']['body']['data'][my_length - 1]['x']
@@ -175,6 +176,7 @@ def nextMove(data):
             print('!!!')
             while (len(path) == 0):
                 path = findPath(board, my_coords, (data['width'] - my_x + i, data['height'] - my_y + i))
+                i += 1
             
     
     target_coords = path[0]
