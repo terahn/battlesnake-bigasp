@@ -255,7 +255,7 @@ def move():
             if i == 3:
                 tmp_arr.append((g.get_value_for_down(), 'down'))
 
-                maximum = min(tmp_arr)
+                maximum = max(tmp_arr)
     move = maximum[1]
 
     g.print_board()
@@ -264,7 +264,7 @@ def move():
     print('The tmp_arr picked is: ', tmp_arr)
 
     return {
-        'move': 'up',
+        'move': move,
         'taunt': 'You Fish!'
     }
 
